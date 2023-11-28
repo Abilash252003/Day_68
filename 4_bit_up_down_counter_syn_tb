@@ -1,0 +1,44 @@
+///100 Days of RTL///
+///Abilash P///
+///4 BIT - Down counter with synchronous reset///
+
+module up_down_counter_tb();
+  
+  reg  CLK, RST, inp;
+  wire [3:0] Out;
+  
+  up_down_counter DUT (.CLK(CLK), .RST(RST), .inp(inp), .Out(Out));
+  
+  initial 
+    begin
+      CLK=1;
+      forever #5 CLK = ~CLK;  
+    end 
+  
+  initial
+    begin
+      inp = 1'b0;
+      RST = 1'b1;
+      #20;
+      RST = 1'b0;
+      #160;
+     
+      inp = 1'b1;
+      RST = 1'b1;
+      #20;
+      RST = 1'b0;
+      #160;
+      
+      $finish;
+    end
+  
+  initial
+    begin
+      $dumpfile("dump.vcd");
+      $dumpvars(1);
+    end
+  
+initial
+  $monitor("simtime = %g, CLK = %b, RST = %b, inp = %b, Out = %b", $time, CLK, RST, inp, Out);
+endmodule
+      
