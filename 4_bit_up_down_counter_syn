@@ -1,0 +1,28 @@
+///100 Days of RTL///
+
+///Abilash P///
+
+///4 BIT - Up - down counter with synchronous reset///
+
+module up_down_counter (CLK, RST, inp, Out);
+  
+  input  CLK, RST, inp;
+  output reg [3:0] Out;
+  
+  always @ (posedge CLK)
+    begin
+      if(RST)
+        begin
+          Out = 4'd0;
+        end
+      else if(~inp)
+        begin
+          Out = Out + 4'd1;
+        end
+      else
+        begin
+          Out = Out - 4'd1;
+        end
+    end
+  
+endmodule
